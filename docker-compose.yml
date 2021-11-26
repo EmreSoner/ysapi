@@ -16,7 +16,7 @@ services:
       context: .
     command: celery -A ysapi worker -l info
     volumes:
-      - ./web:/web
+      - .:/code
     depends_on:
       - redis
       - web
@@ -26,6 +26,6 @@ services:
       context: .
     command: celery -A ysapi beat -l info
     volumes:
-      - ./web:/web
+      - .:/code
     depends_on:
       - celery
