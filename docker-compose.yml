@@ -20,3 +20,12 @@ services:
     depends_on:
       - redis
       - web
+  celery_beat:
+    restart: always
+    build:
+      context: .
+    command: celery -A ysapi beat -l info
+    volumes:
+      - ./web:/web
+    depends_on:
+      - celery

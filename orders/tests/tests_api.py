@@ -58,6 +58,14 @@ class OrderServiceTestCase(TestCase):
         response = client.post(endpoint, json=payload)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+        # Valid Status (REJECTED)
+        payload = {
+            'status': OrderStatus.REJECTED
+        }
+        response = client.post(endpoint, json=payload)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Order.objects.first().status, OrderStatus.REJECTED)
+
         # Valid Status (COMPLETED)
         payload = {
             'status': OrderStatus.COMPLETED
@@ -66,10 +74,3 @@ class OrderServiceTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Order.objects.first().status, OrderStatus.COMPLETED)
 
-        # Valid Status (REJECTED)
-        payload = {
-            'status': OrderStatus.REJECTED
-        }
-        response = client.post(endpoint, json=payload)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Order.objects.first().status, OrderStatus.REJECTED)

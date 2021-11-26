@@ -15,3 +15,11 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
+
+app.conf.beat_schedule = {
+    'process_orders': {
+        'task': 'orders.tasks.process_orders_cron',
+        'schedule': 60 * 2,
+        'args': ()
+    },
+}
