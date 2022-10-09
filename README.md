@@ -1,22 +1,22 @@
 # YS Order Service API
 
-# Kurulum
+# Instruction
 ```
 docker-compose build
 docker-compose run web python manage.py migrate
 ```
 
-###  Dummy data(Restaurant, Product, User v.b) yüklemek için alttaki command kullanılabilir.
+###  Dummy data(Restaurant, Product, User etc.). The command creates fixture data. 
 ```
 docker-compose run web python manage.py load_fixture
 ```
 
-## Testleri çalıştırma
+## Running Tests 
 ```
 docker-compose run web python manage.py test
 ```
 
-# API ve bağımlı servisleri çalıştırma
+# Running API and depended services
 ```
 docker-compose up
 ```
@@ -25,15 +25,15 @@ docker-compose up
 ```
 http://0.0.0.0:8000/
 ```
-Doc içerisinde bulunan interact tool'u ile de sipariş datası oluşturulabilir.
+Order data can be created via interact tool in the doc.
 
 ## API URL
 ```
 http://0.0.0.0:8000/api/v1/
 ```
 
-### API Service Kullanım
-Fixture ile gelen data kullanılarak ürün, kullanıcı ve restoran id'leri kullanılarak sipariş oluşturulabilir. 
+### API Service Usage
+Order can be created by using user and restaurant ids from fixture.
 ```
 import coreapi
 
@@ -52,7 +52,7 @@ params = {
 
 result = client.action(schema, action, params=params)
 ```
-### Siparişi manuel olarak tamamlamak ya da iptal etmek icin;
+### To process or cancel the order manually;
 ```
 import coreapi
 
@@ -66,7 +66,7 @@ params = {
 }
 result = client.action(schema, action, params=params)
 ```
-kullanabilirsiniz. Bu işlem normal olarak **celery-beat ile pub/sub** şeklinde 2 dakikada bir bekleyen siparişler için **order process** servisi kullanılarak yapılmaktadır.
-Konfigurasyon için **ysapi/celery.py** dosyasını inceleyebilirsiniz.
+This action normally running from **celery-beat** by using **order process** service per 2 minutes for waiting orders.
+It can be reviewed on **ysapi/celery.py** file to configuration.
 
 
