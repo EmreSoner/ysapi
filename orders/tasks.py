@@ -13,7 +13,13 @@ def process_orders_cron():
         process_order.apply_async((order.id, ))
 
 
-@app.task
+@app.task(
+    # RequestException covers ConnectionError, HTTPError, Timeout, TooManyRedirects
+    autoretry_for=(requests.exceptions.RequestException,),
+    retry_backoff=5,
+    max_retries=7,
+    retry_jitter=False,
+)
 def process_order(order_id):
     endpoint = '{}{}'.format(settings.API_URL, reverse_lazy('order-process', kwargs={'pk': order_id}))
     payload = {
