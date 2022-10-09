@@ -21,11 +21,25 @@ def load_fixture():
             {'name': 'Yengen', 'price': '15.00'},
         ]}]
 
-
     users = [
-        {'first_name': 'Uğur', 'last_name': 'Özi', 'email': 'uozy@yspt.com', 'username': 'uozy@yspt.com'},
-        {'first_name': 'Cenk', 'last_name': 'Yaldız', 'email': 'cyaldiz@yspt.com', 'username': 'cyaldiz@yspt.com'},
-        {'first_name': 'Selin', 'last_name': 'Simge', 'email': 'ssimge@yspt.com', 'username': 'ssimge@yspt.com'}
+        {
+            'first_name': 'Emre Soner',
+            'last_name': 'Demir',
+            'email': 'esd@woltusertest.com',
+            'username': 'esd@woltusertest.com'
+        },
+        {
+            'first_name': 'Ahmet',
+            'last_name': 'Yaldız',
+            'email': 'ay@woltusertest.com',
+            'username': 'ay@woltusertest.com'
+        },
+        {
+            'first_name': 'Mehmet',
+            'last_name': 'Simge',
+            'email': 'ms@woltusertest.com',
+            'username': 'ms@woltusertest.com'
+        }
     ]
 
     for restaurant in restaurants:
